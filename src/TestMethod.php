@@ -18,7 +18,7 @@ class TestMethod extends Command
     protected function configure()
     {
         $this->setname('print_string')
-            ->addArgument('string', InputArgument::REQUIRED, 'Who do you want to greet?')
+            ->addArgument('string', InputArgument::REQUIRED, 'String to print?')
             ->addArgument('times', InputArgument::OPTIONAL, 'How many times print?');
     }
 
