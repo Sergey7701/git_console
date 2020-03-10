@@ -1,0 +1,14 @@
+{
+    "name": "vendor/git-console",
+    "description": "Description of project git_console.",
+    "authors": [
+        {
+            "name": "sergey",
+            "email": "your@email.here"
+        }
+    ],
+    "require": {
+        "symfony/string": "dev-master",
+        "symfony/console": "dev-master"
+    }
+}
