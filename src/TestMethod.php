@@ -7,7 +7,8 @@ namespace App;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-
+use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Question\ConfirmationQuestion;
 
 class TestMethod extends Command
 {
@@ -17,12 +18,17 @@ class TestMethod extends Command
 
     protected function configure()
     {
-          $this->setname('git test');
+        $this->setname('questions')
+            ->addArgument('string', InputArgument::REQUIRED, 'String to print?')
+            ->addArgument('times', InputArgument::OPTIONAL, 'How many times print?');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $output->writeln('dev');
-        return 0;
+        $helper   = $this->getHelper('question');
+        $question = new ConfirmationQuestion('Continue with this action?', false);
+        if (!$helper->ask($input, $output, $question)) {
+            return;
+        }
     }
 }
