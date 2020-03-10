@@ -7,6 +7,7 @@ namespace App;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Input\InputArgument;
 
 
 class TestMethod extends Command
@@ -17,12 +18,14 @@ class TestMethod extends Command
 
     protected function configure()
     {
-          $this->setname('git test');
+          $this->setname('say_hello')
+              ->addArgument('name', InputArgument::REQUIRED, 'Who do you want to greet?');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $output->writeln('dev');
+        $name = $input->getArgument('name');
+        $output->writeln("Привет $name");
         return 0;
     }
 }
