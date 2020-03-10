@@ -9,7 +9,6 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputArgument;
 
-
 class TestMethod extends Command
 {
 
@@ -18,14 +17,18 @@ class TestMethod extends Command
 
     protected function configure()
     {
-          $this->setname('say_hello')
-              ->addArgument('name', InputArgument::REQUIRED, 'Who do you want to greet?');
+        $this->setname('print_string')
+            ->addArgument('string', InputArgument::REQUIRED, 'Who do you want to greet?')
+            ->addArgument('times', InputArgument::OPTIONAL, 'How many times print?');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $name = $input->getArgument('name');
-        $output->writeln("Привет $name");
+        $string = $input->getArgument('string');
+        $times = $input->getArgument('times') ? $input->getArgument('times') : 1;
+        for ($i = 0; $i < $times; $i++) {
+            $output->writeln("$string");
+        }
         return 0;
     }
 }
