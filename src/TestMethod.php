@@ -9,26 +9,37 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
+use Symfony\Component\Console\Question\Question;
+use Symfony\Component\Console\Question\ChoiceQuestion;
 
 class TestMethod extends Command
 {
 
-    // the name of the command (the part after "bin/console")
+// the name of the command (the part after "bin/console")
     protected static $defaultName = 'app:create-user';
 
     protected function configure()
     {
-        $this->setname('questions')
-            ->addArgument('string', InputArgument::REQUIRED, 'String to print?')
-            ->addArgument('times', InputArgument::OPTIONAL, 'How many times print?');
+        $this->setname('questions');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $helper   = $this->getHelper('question');
-        $question = new ConfirmationQuestion('Continue with this action?', false);
-        if (!$helper->ask($input, $output, $question)) {
-            return;
-        }
+        $helper         = $this->getHelper('question');
+        $questionName   = new Question('Как вас зовут? ');
+        $questionAge    = new Question('Сколько вам лет? ');
+        $questionGender = new ChoiceQuestion('Ваш пол? ', [
+            'М',
+            'Ж',
+            ],
+                                             0
+        );
+        $name           = $helper->ask($input, $output, $questionName);
+        $age            = $helper->ask($input, $output, $questionAge);
+        $gender         = $helper->ask($input, $output, $questionGender);
+        $output->write($name . ' ');
+        $output->write($age . ' ');
+        $output->writeln($gender);
+        return 1;
     }
 }
