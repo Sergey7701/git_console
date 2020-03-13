@@ -12,7 +12,7 @@ use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Question\Question;
 use Symfony\Component\Console\Question\ChoiceQuestion;
 
-class TestMethod extends Command
+class UserInput extends Command
 {
 
 // the name of the command (the part after "bin/console")
